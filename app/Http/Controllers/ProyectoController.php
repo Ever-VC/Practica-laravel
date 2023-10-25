@@ -12,7 +12,7 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-        //
+        return view('index');
     }
 
     /**
@@ -59,6 +59,14 @@ class ProyectoController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Proyecto $proyecto)
+    {
+        //
+    }
+
+    /**
+     * Generates a report for the specified storage resource.
+     */
+    public function report(Proyecto $proyecto)
     {
         //
     }
