@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProyectoController extends Controller
 {
@@ -12,7 +14,8 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $proyectos = Proyecto::latest()->get();
+        return view('index', ['proyectos' => $proyectos]);
     }
 
     /**
@@ -20,15 +23,24 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'NombreProyecto' => 'required',
+            'fuenteFondos' => 'required',
+            'MontoPlanificado' => 'required',
+            'MontoPatrocinado' => 'required',
+            'MontoFondosPropios' => 'required'
+        ]);
+
+        Proyecto::create($request->all());
+        return redirect()->route('proyectos.index')->with('success', 'Nuevo proyecto creado exitosamente');
     }
 
     /**

@@ -7,9 +7,15 @@
             <h2 class="text-white">CRUD de Proyectos</h2>
         </div>
         <div>
-            <a href="" class="btn btn-primary mt-2">Crear proyecto</a>
+            <a href="{{route('proyectos.create')}}" class="btn btn-primary mt-2">Crear proyecto</a>
         </div>
     </div>
+
+    @if (Session::get('success'))
+        <div class="alert alert-success mt-3">
+            <strong>{{Session::get('success')}}</strong><br><br>
+        </div>
+    @endif
 
     <div class="col-12 mt-4">
         <table class="table table-bordered text-white">
@@ -22,22 +28,24 @@
                 <th>Monto de fondos propios</th>
                 <th>Acción</th>
             </tr>
-            <tr>
-                <td class="fw-bold">1</td>
-                <td>Curso de PHP y Laravel</td>
-                <td>El Estado</td>
-                <td>$50000</td>
-                <td>$30000</td>
-                <td>$20000</td>
-                <td>
-                    <a href="" class="btn btn-warning">Editar</a>
+            @foreach ($proyectos as $proyecto)
+                <tr>
+                    <td class="fw-bold">{{$proyecto->id}}</td>
+                    <td>{{$proyecto->NombreProyecto}}</td>
+                    <td>{{$proyecto->fuenteFondos}}</td>
+                    <td>${{$proyecto->MontoPlanificado}}</td>
+                    <td>${{$proyecto->MontoPatrocinado}}</td>
+                    <td>${{$proyecto->MontoFondosPropios}}</td>
+                    <td>
+                        <a href="" class="btn btn-warning">Editar</a>
 
-                    <form action="" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                    <a href="" class="btn btn-success">Generar informe</a>
-                </td>
-            </tr>
+                        <form action="" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                        <a href="" class="btn btn-success">Generar informe</a>
+                    </td>
+                </tr>
+            @endforeach
         </table>
     </div>
 </div>
