@@ -22,3 +22,4 @@ Route::get('/', function () {
 
 Route::resource('/', ProyectoController::class);
 Route::resource('/proyectos', ProyectoController::class);
+Route::get('/proyectos/{proyecto}/informe', [ProyectoController::class, 'report'])->name('proyectos.report');

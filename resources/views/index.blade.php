@@ -37,16 +37,18 @@
                     <td>${{$proyecto->MontoPatrocinado}}</td>
                     <td>${{$proyecto->MontoFondosPropios}}</td>
                     <td>
-                        <a href="" class="btn btn-warning">Editar</a>
-
-                        <form action="" method="post" class="d-inline">
+                        <a href="{{route('proyectos.edit', $proyecto)}}" class="btn btn-warning">Editar</a>
+                        <form action="{{route('proyectos.destroy', $proyecto)}}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
-                        <a href="" class="btn btn-success">Generar informe</a>
+                        <a href="{{route('proyectos.report', $proyecto)}}" class="btn btn-success">Generar informe</a>
                     </td>
                 </tr>
             @endforeach
         </table>
+        {{$proyectos->links()}}
     </div>
 </div>
 @endsection
